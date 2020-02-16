@@ -1,12 +1,12 @@
 pipeline {
 
-    // agent {
-    //     docker {
-    //         image 'node:alpine'
-    //     }
-    // }
+    agent {
+        docker {
+            image 'node:alpine'
+        }
+    }
 
-    agent any
+    //agent any
 
     environment {
         PASSWORD = credentials('DOCKER_PASSWORD')
