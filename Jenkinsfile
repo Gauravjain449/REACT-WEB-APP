@@ -22,6 +22,7 @@ pipeline {
         stage('Clean WS') {
             steps {
                 cleanWs()
+                git credentialsId: 'GitHub', url: "https://github.com/Gauravjain449/REACT-WEB-APP.git"
             }
 
         }
