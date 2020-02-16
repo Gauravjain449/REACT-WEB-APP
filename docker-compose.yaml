@@ -1,0 +1,9 @@
+version: '3'
+services: 
+    client-prod:
+        restart: always
+        build:
+            context: .
+        volumes: 
+            - /app/node_modules
+            - ./:/app
