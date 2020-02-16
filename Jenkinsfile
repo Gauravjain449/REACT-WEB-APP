@@ -29,17 +29,18 @@ pipeline {
         
         stage('Docker build image') {
             steps {
-                     sh 'docker build -t ${REPOSITORY_TAG} -f Dockerfile.dev .'
-                }
+                sh 'docker build -t ${REPOSITORY_TAG} -f Dockerfile.dev .'
             }
         }
 
-        stage('Docker test image') {
+         stage('Docker test image') {
             steps {
-                     sh 'docker run -e CI=true ${REPOSITORY_TAG} npm run test'
-                }
+                sh 'docker run -e CI=true ${REPOSITORY_TAG} npm run test'
             }
         }
 
-
+    }
+       
 }
+
+
