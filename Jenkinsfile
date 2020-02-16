@@ -30,13 +30,13 @@ pipeline {
         
         stage('Docker build Test image') {
             steps {
-                sh 'docker build --name=${REPOSITORY_TEST_TAG} -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
+                sh 'docker build -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
             }
         }
 
          stage('Docker Test image') {
             steps {
-                sh 'docker run -e CI=true ${REPOSITORY_TEST_TAG} npm run test'
+                sh 'docker run --name=${REPOSITORY_TEST_TAG} -e CI=true ${REPOSITORY_TEST_TAG} npm run test'
             }
         }
 
