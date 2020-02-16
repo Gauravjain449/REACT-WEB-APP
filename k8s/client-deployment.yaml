@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: client
-          image: gauravjain449/client-app
+          image: ${REPOSITORY_PROD_TAG}
           imagePullPolicy: Never
           ports:
             - containerPort: 80
