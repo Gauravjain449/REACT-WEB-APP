@@ -12,6 +12,7 @@ pipeline {
         PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TEST_TAG="${DOCKER_HUB_USER_NAME}/client-app-test:${BUILD_ID}"
         REPOSITORY_PROD_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
+        CONTAINER_NAME="client-app-test-${BUILD_ID}"
         }
 
     options {
@@ -36,13 +37,13 @@ pipeline {
 
          stage('Docker Test image') {
             steps {
-                sh 'docker run --name=${REPOSITORY_TEST_TAG} -e CI=true ${REPOSITORY_TEST_TAG} npm run test'
+                sh 'docker run --name=${CONTAINER_NAME} -e CI=true ${REPOSITORY_TEST_TAG} npm run test'
             }
         }
 
         stage('Docker delete Test image') {
             steps {
-                sh 'docker rm ${REPOSITORY_TEST_TAG}'
+                sh 'docker rm ${CONTAINER_NAME}'
                 sh 'docker rmi ${REPOSITORY_TEST_TAG}'
             }
         }
