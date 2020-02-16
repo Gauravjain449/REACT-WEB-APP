@@ -12,7 +12,7 @@ pipeline {
         PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TEST_TAG="${DOCKER_HUB_USER_NAME}/client-app-test:${BUILD_ID}"
         REPOSITORY_PROD_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
-        SHA=$(git rev-parse HEAD)
+        SHA="${git rev-parse HEAD}"
        }
 
     options {
