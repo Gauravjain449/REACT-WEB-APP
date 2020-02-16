@@ -30,7 +30,7 @@ pipeline {
         
         stage('Docker build Test image') {
             steps {
-                sh 'docker build -name ${REPOSITORY_TEST_TAG} -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
+                sh 'docker build --name=${REPOSITORY_TEST_TAG} -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
             }
         }
 
