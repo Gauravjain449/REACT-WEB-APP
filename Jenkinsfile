@@ -30,7 +30,7 @@ pipeline {
         
         stage('Docker build Test image') {
             steps {
-                sh 'docker build -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
+                sh 'docker build -name ${REPOSITORY_TEST_TAG} -t ${REPOSITORY_TEST_TAG} -f Dockerfile.dev .'
             }
         }
 
@@ -40,8 +40,9 @@ pipeline {
             }
         }
 
-         stage('Docker delete Test image') {
+        stage('Docker delete Test image') {
             steps {
+                sh 'docker rm ${REPOSITORY_TEST_TAG}'
                 sh 'docker rmi ${REPOSITORY_TEST_TAG}'
             }
         }
