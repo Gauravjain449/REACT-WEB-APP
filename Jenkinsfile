@@ -63,8 +63,8 @@ pipeline {
 
         stage('kubernetes deployment') {
             steps {
-                sh 'envsubst < ${WORKSPACE}/k8s | kubectl delete  -'
-                sh 'envsubst < ${WORKSPACE}/k8s | kubectl apply  -'
+                sh 'envsubst < ${WORKSPACE}/k8s | kubectl delete .'
+                sh 'envsubst < ${WORKSPACE}/k8s | kubectl apply  .'
             }
         }
 
