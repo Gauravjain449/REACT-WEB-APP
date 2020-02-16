@@ -11,8 +11,7 @@ pipeline {
     environment {
         PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
-        CI = 'true'
-    }
+       }
 
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -31,6 +30,13 @@ pipeline {
         stage('Docker build image') {
             steps {
                      sh 'docker build -t ${REPOSITORY_TAG} -f Dockerfile.dev .'
+                }
+            }
+        }
+
+        stage('Docker test image') {
+            steps {
+                     sh 'docker run -e CI=true ${REPOSITORY_TAG} npm run test'
                 }
             }
         }
