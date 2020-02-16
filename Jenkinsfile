@@ -1,10 +1,12 @@
 pipeline {
 
-    agent {
-        docker {
-            image 'node:alpine'
-        }
-    }
+    // agent {
+    //     docker {
+    //         image 'node:alpine'
+    //     }
+    // }
+
+    agent any
 
     environment {
         REPOSITORY_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
