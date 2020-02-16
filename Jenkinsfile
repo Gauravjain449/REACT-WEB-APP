@@ -7,6 +7,8 @@ pipeline {
     }
 
     environment {
+        PASSWORD = credentials('DOCKER_PASSWORD')
+        REPOSITORY_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
         CI = 'true'
     }
 
@@ -15,10 +17,17 @@ pipeline {
     }
 
     stages {
+
+        stage('Clean WS') {
+            step {
+                cleanWs()
+            }
+
+        }
         
-        stage('Install Dependencies') {
+        stage('Docker build image') {
             steps {
-                    sh 'npm install'
+                     sh 'docker build -t ${REPOSITORY_TAG} -f Dockerfile.dev .'
                 }
             }
         }
