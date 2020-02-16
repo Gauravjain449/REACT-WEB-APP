@@ -40,6 +40,12 @@ pipeline {
             }
         }
 
+         stage('Docker delete Test image') {
+            steps {
+                sh 'docker rmi ${REPOSITORY_TEST_TAG}'
+            }
+        }
+
         stage('Docker build Prod image') {
             steps {
                 sh 'docker build -t ${REPOSITORY_PROD_TAG} .'
@@ -59,6 +65,8 @@ pipeline {
                 sh 'envsubst < ${WORKSPACE}/k8s | kubectl apply . -'
             }
         }
+
+
 
     }
        
