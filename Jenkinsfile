@@ -9,6 +9,7 @@ pipeline {
     agent any
 
     environment {
+        PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
         CI = 'true'
     }
