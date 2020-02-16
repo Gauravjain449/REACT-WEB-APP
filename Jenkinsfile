@@ -42,14 +42,15 @@ pipeline {
 
         stage('Docker build Prod image') {
             steps {
-                sh 'docker build -t ${REPOSITORY_PROD_TAG} .'
+                sh 'docker build -t ${REPOSITORY_PROD_TAG}:latest -t ${REPOSITORY_PROD_TAG}:$SHA .'
             }
         }
 
         stage('Docker image push') {
             steps {
                 sh 'echo "${PASSWORD}" | docker login -u "${DOCKER_HUB_USER_NAME}" --password-stdin'
-                sh 'docker push ${REPOSITORY_PROD_TAG}'
+                sh 'docker push ${REPOSITORY_PROD_TAG}:latest'
+                sh 'docker push ${REPOSITORY_PROD_TAG}:$SHA'
             }
         }
 
