@@ -2,23 +2,23 @@
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-    name: client-deployment
+      name: client-deployment
     spec:
-    replicas: 3
-    selector:
+      replicas: 3
+      selector:
         matchLabels:
-        component: web
-    template:
+          component: web
+      template:
         metadata:
-        labels:
+          labels:
             component: web
         spec:
-        containers:
-            - name: client
+          containers:
+          - name: client
             image: ${REPOSITORY_PROD_TAG}
             imagePullPolicy: Never
             ports:
-                - containerPort: 80
+            - containerPort: 80
 
 ---
 
