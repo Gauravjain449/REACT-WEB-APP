@@ -1,30 +1,25 @@
 pipeline {
 
     agent {
-
         docker {
-
             image 'node:alpine'
-
         }
-
     }
 
     environment {
-
         CI = 'true'
-        
     }
 
-        stages {
+    options {
+        timeout(time: 1, unit: 'HOURS')
+    }
 
-            stage('Install Dependencies') {
-
-                steps {
-
+    stages {
+        
+        stage('Install Dependencies') {
+            steps {
                     sh 'npm install'
                 }
-
             }
         }
 
