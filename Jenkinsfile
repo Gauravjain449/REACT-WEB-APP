@@ -12,8 +12,7 @@ pipeline {
         PASSWORD = credentials('DOCKER_PASSWORD')
         REPOSITORY_TEST_TAG="${DOCKER_HUB_USER_NAME}/client-app-test:${BUILD_ID}"
         REPOSITORY_PROD_TAG="${DOCKER_HUB_USER_NAME}/client-app:${BUILD_ID}"
-        SHA="${git rev-parse HEAD}"
-       }
+        }
 
     options {
         timeout(time: 1, unit: 'HOURS')
@@ -43,15 +42,14 @@ pipeline {
 
         stage('Docker build Prod image') {
             steps {
-                sh 'docker build -t ${REPOSITORY_PROD_TAG}:latest -t ${REPOSITORY_PROD_TAG}:$SHA .'
+                sh 'docker build -t ${REPOSITORY_PROD_TAG} .'
             }
         }
 
         stage('Docker image push') {
             steps {
                 sh 'echo "${PASSWORD}" | docker login -u "${DOCKER_HUB_USER_NAME}" --password-stdin'
-                sh 'docker push ${REPOSITORY_PROD_TAG}:latest'
-                sh 'docker push ${REPOSITORY_PROD_TAG}:$SHA'
+                sh 'docker push ${REPOSITORY_PROD_TAG}'
             }
         }
 
